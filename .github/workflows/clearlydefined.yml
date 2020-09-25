@@ -1,4 +1,24 @@
-- name: ClearlyNoticed Action
-  # You may pin to the exact commit or the version.
-  # uses: dabutvin/chive-action@724409eb4087dc731ba9d8f158de74a86d9d4244
-  uses: dabutvin/chive-action@1.1.0
+name: Attribution NOTICES file
+
+on:
+  push:
+    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: setup nodejs and required npm packages
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.12
+
+    - name: ClearlyNoticed Action
+      uses: dabutvin/chive-action@1.1.0
+      with:
+        args: --filename NOTICES
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
